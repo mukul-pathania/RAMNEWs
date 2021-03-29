@@ -12,3 +12,5 @@ class Config(object):
     REFRESH_TOKEN_SECRET = os.environ.get('REFRESH_TOKEN_SECRET') or 'kjfyhasbdf98754FHKSFY9845HKFADSFSFSD0-9+/*-'
     TOKEN_VALIDITY_MINUTES = int(os.environ.get('TOKEN_VALIDITY_MINUTES')) or 15
     REFRESH_TOKEN_VALIDITY_DAYS = int(os.environ.get('REFRESH_TOKEN_VALIDITY_DAYS')) or 2
+    CORS_METHODS = ['POST']
+    CORS_ORIGINS = os.environ.get('CORS_ORIGINS') or 'http://localhost:3000'
