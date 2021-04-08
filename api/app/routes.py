@@ -1,5 +1,5 @@
 from app import app
-from app.database import get_user, write_user
+from app.database import get_user, write_user , Refresh_Token , check_refresh_token
 from app.token import get_token, get_refresh_token
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_cors import cross_origin
@@ -22,8 +22,8 @@ def login():
         if not user_data['user']:
             raise Exception(user_data['message'])
         user = user_data['user']
-        token = get_token(user)
-        refresh_token = get_refresh_token(user)
+        token = get_token(user['_id']['$oid'])
+        refresh_token = get_refresh_token(user['_id']['$oid'])
         response = make_response({'token': token, 'error': False, 'message': 'Logged in successfully'})
         response.set_cookie('refresh_token', refresh_token, httponly=True)
         return response, 200
@@ -42,3 +42,32 @@ def signup():
     if not user_data['user_id']:
         return {'error': True, 'message': user_data['message']}, 409
     return {'error': False, 'message': user_data['message']}
+
+@app.route('/refresh_token',methods=['GET'])
+@cross_origin()
+def refresh_token():
+    refreshtoken = request.cookies.get('refresh_token')
+    if not refreshtoken:
+        response = make_response({'token': None, 'error': True, 'message': 'Refresh Token Not Found'})
+        return response , 401
+    try:
+        decoded = jwt.decode(refreshtoken,app.config['REFRESH_TOKEN_SECRET'], algorithms='HS256')
+        isTokenFound = check_refresh_token(decoded["user_id"])
+        if isTokenFound['refresh_token']:
+            token = get_token(decoded["user_id"])
+            refresh_token = get_refresh_token(decoded["user_id"])
+            response = make_response({'token': token, 'error': False, 'message': 'Request Processed'})
+            response.set_cookie('refresh_token', refresh_token, httponly=True)
+            return response, 200
+        else :
+            response = make_response({'token': None, 'error': True, 'message': 'Invalid Refresh Token'})
+            return response , 401
+
+    except jwt.ExpiredSignatureError:
+        response = make_response({'token': None, 'error': True, 'message': ' Refresh Token Expired'})
+        return response , 401
+    
+    except Exception as e:
+        # print('error', e)
+        # e.with_traceback(e)
+        return {'error': True, 'message': e.args[0]}, 401

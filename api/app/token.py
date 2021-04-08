@@ -4,9 +4,9 @@ from datetime import datetime, timedelta
 import jwt
 
 
-def get_token(user):
+def get_token(user_id):
     try:
-        token = jwt.encode({'user_id': user['_id']['$oid'],
+        token = jwt.encode({'user_id': user_id,
                             'exp': datetime.utcnow() + timedelta(minutes=app.config['TOKEN_VALIDITY_MINUTES']),
                             'iat': datetime.utcnow()},
                         app.config['TOKEN_SECRET'], algorithm='HS256')
@@ -17,9 +17,8 @@ def get_token(user):
         return None
 
 
-def get_refresh_token(user):
+def get_refresh_token(user_id):
     try:
-        user_id = user['_id']['$oid']
         token = jwt.encode({'user_id': user_id,
                                     'exp': datetime.utcnow() + timedelta(days=app.config['REFRESH_TOKEN_VALIDITY_DAYS']),
                                     'iat': datetime.utcnow()},

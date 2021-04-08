@@ -51,3 +51,16 @@ def write_user(user_data):
     except Exception as e:
         print(e)
         return {'user_id': None, 'message': 'An error occured while processing the request'}
+
+
+def check_refresh_token(user_id):
+    try:
+        refreshtoken = Refresh_Token.find_one({'user_id': user_id})
+        if refreshtoken:
+            return {'refresh_token': True , 'message':'Token Found'}
+        else :
+            return{'refresh_token': False, 'message' : 'No token Found'}
+    except  Exception as e:
+        return{'refresh_token': False, 'message' : 'Error occured while processing request'}
+
+
