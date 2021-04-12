@@ -1,6 +1,7 @@
 from app import app
 from app.database import get_user, write_user , Refresh_Token , check_refresh_token
 from app.token import get_token, get_refresh_token
+from app.newsapi import get_top_headlines
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_cors import cross_origin
 from flask import request, make_response, jsonify
@@ -64,10 +65,19 @@ def refresh_token():
             return response , 401
 
     except jwt.ExpiredSignatureError:
-        response = make_response({'token': None, 'error': True, 'message': ' Refresh Token Expired'})
+        response = make_response({'token': None, 'error': True, 'message': 'Refresh Token Expired'})
         return response , 401
     
     except Exception as e:
         # print('error', e)
         # e.with_traceback(e)
         return {'error': True, 'message': e.args[0]}, 401
+
+
+@app.route('/headlines/<category>', methods=['GET'])
+@cross_origin()
+def headlines(category):
+    headlines = get_top_headlines(category=category)
+    if(headlines['error']):
+        return make_response(**headlines), 400
+    return headlines

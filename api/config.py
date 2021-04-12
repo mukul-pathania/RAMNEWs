@@ -18,3 +18,5 @@ class Config(object):
                    'port': os.environ.get('REDIS_PORT', 6379),
                    'db': os.environ.get('REDIS_DATABASE', 0), 
                    'password': os.environ.get('REDIS_PASSWORD')}
+    NEWS_API_KEY = os.environ.get('NEWS_API_KEY')
+    NEWS_API_SECRET = os.environ.get('NEWS_API_SECRET')
