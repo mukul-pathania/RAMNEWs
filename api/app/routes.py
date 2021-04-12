@@ -79,5 +79,5 @@ def refresh_token():
 def headlines(category):
     headlines = get_top_headlines(category=category)
     if(headlines['error']):
-        return make_response(**headlines), 400
+        return headlines, 500
     return headlines

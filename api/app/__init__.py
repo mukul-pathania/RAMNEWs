@@ -6,4 +6,4 @@ app = Flask(__name__)
 app.config.from_object(Config)
 cors = CORS(app)
 
-from app import routes, database
+from app import routes, database, redis

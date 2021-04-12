@@ -20,3 +20,4 @@ class Config(object):
                    'password': os.environ.get('REDIS_PASSWORD')}
     NEWS_API_KEY = os.environ.get('NEWS_API_KEY')
     NEWS_API_SECRET = os.environ.get('NEWS_API_SECRET')
+    REDIS_HEADLINE_CACHE_DURATION = os.environ.get('REDIS_HEADLINE_CACHE_DURATION', 1800)

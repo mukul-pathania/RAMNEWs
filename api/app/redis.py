@@ -1,7 +1,24 @@
 from app import app
 from redis import Redis
+import sys
 
-redis_client = Redis(**app.config['REDIS_SETUP'])
+
+
+def redis_connect():
+    try:
+        client = Redis(**app.config['REDIS_SETUP'])
+        ping = client.ping()
+        if ping is True:
+            return client
+        else:
+            raise Exception('Could not connect to Redis')
+    except Exception as e:
+        print(e)
+        sys.exit(1)
+
+
+
+redis_client = redis_connect()
 
 
 def get_from_cache(key):
