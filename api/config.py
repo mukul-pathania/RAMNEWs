@@ -14,3 +14,7 @@ class Config(object):
     REFRESH_TOKEN_VALIDITY_DAYS = int(os.environ.get('REFRESH_TOKEN_VALIDITY_DAYS')) or 2
     CORS_METHODS = ['POST']
     CORS_ORIGINS = os.environ.get('CORS_ORIGINS') or 'http://localhost:3000'
+    REDIS_SETUP = {'host': os.environ.get('REDIS_HOST', 'localhost'), 
+                   'port': os.environ.get('REDIS_PORT', 6379),
+                   'db': os.environ.get('REDIS_DATABASE', 0), 
+                   'password': os.environ.get('REDIS_PASSWORD')}
