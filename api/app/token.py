@@ -1,6 +1,8 @@
 from app import app
 from app.database import Refresh_Token
+from flask import request
 from datetime import datetime, timedelta
+from functools import wraps
 import jwt
 
 
@@ -33,3 +35,25 @@ def get_refresh_token(user_id):
     except Exception as e:
         print(e)
         return None
+
+def token_required(f):
+    @wraps(f)
+    def decorator(*args, **kwargs):
+        token = None
+        if 'Authorization' in request.headers:
+            #Authorization : Bearer <token>
+            token = request.headers['Authorization'].split()[1]
+        if not token:
+            return {'message': 'Token not found', 'error': True}, 401
+
+        try:
+            data = jwt.decode(token, app.config['TOKEN_SECRET'], algorithms='HS256')
+        except jwt.ExpiredSignatureError:
+            return {'message': 'Token Expired', 'error': True}, 401
+        except Exception as e:
+            print(e)
+            return {'message': 'An error occured while processing your request', 'error': True}, 401
+        
+        return f(*args, **kwargs)
+    
+    return decorator

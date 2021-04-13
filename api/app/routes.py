@@ -1,6 +1,6 @@
 from app import app
 from app.database import get_user, write_user , Refresh_Token , check_refresh_token
-from app.token import get_token, get_refresh_token
+from app.token import get_token, get_refresh_token, token_required
 from app.newsapi import get_top_headlines
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_cors import cross_origin
@@ -76,7 +76,10 @@ def refresh_token():
 
 @app.route('/headlines/<category>', methods=['GET'])
 @cross_origin()
+@token_required
 def headlines(category):
+    if category not in ['business', 'entertainment', 'general', 'health', 'science', 'sports', 'technology']:
+        return {'message': 'Incorrect category provided', 'error': True}, 404
     headlines = get_top_headlines(category=category)
     if(headlines['error']):
         return headlines, 500
