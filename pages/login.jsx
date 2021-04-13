@@ -22,8 +22,7 @@ export default function Login() {
     console.log('submitting');
     console.log(state);
     try {
-      const res = await Api.post('login', state);
-      console.log(res);
+      await Api.post('login', state);
     } catch (e) {
       console.log(e);
     }
