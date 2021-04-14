@@ -22,7 +22,7 @@ export default function Login() {
     console.log('submitting');
     console.log(state);
     try {
-      await Api.post('login', state);
+      await Api.post('login', state, { withCredentials: true });
     } catch (e) {
       console.log(e);
     }
