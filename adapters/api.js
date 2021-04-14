@@ -1,4 +1,5 @@
 import Axios from 'axios';
+import Router from 'next/router';
 
 let token;
 
@@ -11,19 +12,22 @@ const api = Axios.create({
   },
 });
 
-// const getRefreshToken = async () => {
-//   try {
-//     console.log('Entering');
-//     const res = await Axios.get('http://localhost:5000/refresh_token');
-//     console.log('Response', res);
-//     token = res.data.token;
-//     if (token) {
-//       return token;
-//     }
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
+const getRefreshToken = async () => {
+  try {
+    const res = await Axios.get('http://localhost:5000/refresh_token', {
+      withCredentials: true,
+      crossDomain: true,
+    });
+    console.log('Response', res);
+    token = res.data.token;
+    if (token) {
+      return token;
+    }
+  } catch (error) {
+    console.log(error);
+    Router.push('/');
+  }
+};
 
 api.interceptors.response.use(
   async (response) => {
@@ -32,8 +36,6 @@ api.interceptors.response.use(
       token = response.data.token;
       api.defaults.headers.common.Authorization = `Bearer ${token}`;
       console.log(api.defaults.headers);
-      // const testtoken = await getRefreshToken();
-      // console.log(`Test Token ${testtoken}`);
     }
     return response;
   },
@@ -42,9 +44,11 @@ api.interceptors.response.use(
     if (error.response.status === 401 && !ogReq._retry) {
       ogReq._retry = true;
       console.log('retrying....');
-      // token = await getRefreshToken();
-      // api.defaults.headers.common.Authorization = `Bearer ${token}`;
-      return api(ogReq); // retry original request
+      token = await getRefreshToken();
+      if (token) {
+        api.defaults.headers.common.Authorization = `Bearer ${token}`;
+        return api(ogReq); // retry original request
+      }
     }
   }
 );
