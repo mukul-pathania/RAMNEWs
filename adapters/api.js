@@ -10,6 +10,8 @@ const api = Axios.create({
     'Content-Type': 'application/json',
     // 'Access-Control-Allow-Origin': '*',
   },
+  withCredentials: true,
+  // crossDomain: true,
 });
 
 const getRefreshToken = async () => {
