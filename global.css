@@ -1,0 +1,94 @@
+*, *::after, *::before{
+    padding: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+@font-face {
+    font-family: "Logo";
+    src: url("/fonts/Aquire/Aquire-Bold.otf");
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Gudea-Bold";
+    src: url("/fonts/Gudea/Gudea-Bold.ttf");
+    font-display: swap;
+}
+@font-face {
+    font-family: "Gudea-Italic";
+    src: url("/fonts/Gudea/Gudea-Italic.ttf");
+    font-display: swap;
+}
+@font-face {
+    font-family: "Gudea-Regular";
+    src: url("/fonts/Gudea-Regular.ttf");
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Rajdhani-Light";
+    src: url("/fonts/Rajdhani/Rajdhani-Light.ttf");
+    font-display: swap;
+}
+@font-face {
+    font-family: "Rajdhani-Regular";
+    src: url("/fonts/Rajdhani/Rajdhani-Regular.ttf");
+    font-display: swap;
+}
+@font-face {
+    font-family: "Rajdhani-Medium";
+    src: url("/fonts/Rajdhani/Rajdhani-Medium.ttf");
+    font-display: swap;
+}
+@font-face {
+    font-family: "Rajdhani-SemiBold";
+    src: url("/fonts/Rajdhani/Rajdhani-SemiBold.ttf");
+    font-display: swap;
+}
+@font-face {
+    font-family: "Rajdhani-Bold";
+    src: url("/fonts/Rajdhani/Rajdhani-Bold.ttf");
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "LibreFranklin-Thin";
+    src: url("/fonts/Libre_Franklin/static/LibreFranklin-Thin.ttf");
+    font-display: swap;
+}
+@font-face {
+    font-family: "LibreFranklin-ExtraLight";
+    src: url("/fonts/Libre_Franklin/static/LibreFranklin-ExtraLight.ttf");
+    font-display: swap;
+}
+@font-face {
+    font-family: "LibreFranklin-Light";
+    src: url("/fonts/Libre_Franklin/static/LibreFranklin-Light.ttf");
+    font-display: swap;
+}
+@font-face {
+    font-family: "LibreFranklin-Regular";
+    src: url("/fonts/Libre_Franklin/static/LibreFranklin-Regular.ttf");
+    font-display: swap;
+}
+@font-face {
+    font-family: "LibreFranklin-Medium";
+    src: url("/fonts/Libre_Franklin/static/LibreFranklin-Medium.ttf");
+    font-display: swap;
+}
+@font-face {
+    font-family: "LibreFranklin-SemiBold";
+    src: url("/fonts/Libre_Franklin/static/LibreFranklin-SemiBold.ttf");
+    font-display: swap;
+}
+@font-face {
+    font-family: "LibreFranklin-Bold";
+    src: url("/fonts/Libre_Franklin/static/LibreFranklin-Bold.ttf");
+    font-display: swap;
+}
+@font-face {
+    font-family: "LibreFranklin-Black";
+    src: url("/fonts/Libre_Franklin/static/LibreFranklin-Black.ttf");
+    font-display: swap;
+}
