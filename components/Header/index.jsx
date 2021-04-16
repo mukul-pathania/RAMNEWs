@@ -92,6 +92,7 @@ const NavBarContainer = ({ children, ...props }) => (
     as="nav"
     align="center"
     justify="space-between"
+    position="fixed"
     wrap="wrap"
     w="100%"
     mb={8}

@@ -10,6 +10,7 @@ export default function Hero({ title, subtitle, image, ctaLink, ctaText, ...rest
       wrap="no-wrap"
       minH="70vh"
       px={8}
+      pt={24}
       mb={16}
       {...rest}
     >

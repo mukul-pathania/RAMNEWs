@@ -10,7 +10,7 @@ export default function Home() {
       <Hero
         title="Stories That Count, From People Who Care"
         subtitle="With RAMNEWS you can get all the latest happenings from around the world."
-        image="/images/hero.svg"
+        image="/images/hero2.svg"
         ctaText="Create your account now"
         ctaLink="/"
       />
