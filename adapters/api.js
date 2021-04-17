@@ -35,7 +35,6 @@ api.interceptors.response.use(
     console.log(response);
     if (response.data.token) {
       token = response.data.token;
-      api.defaults.headers.common.Authorization = `Bearer ${token}`;
       console.log(api.defaults.headers);
     }
     return response;
@@ -47,7 +46,6 @@ api.interceptors.response.use(
       console.log('retrying....');
       token = await getRefreshToken();
       if (token) {
-        api.defaults.headers.common.Authorization = `Bearer ${token}`;
         return api(ogReq); // retry original request
       }
     }
