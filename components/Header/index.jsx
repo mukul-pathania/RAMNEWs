@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link, Box, Flex, Text, Button, Stack } from '@chakra-ui/react';
-
 import Logo from './Logo';
 
 const NavBar = (props) => {
@@ -10,7 +9,7 @@ const NavBar = (props) => {
 
   return (
     <NavBarContainer boxShadow="lg" {...props}>
-      <Logo w="10rem" color="black" />
+      <Logo w="8rem" color="black" />
       <MenuToggle toggle={toggle} isOpen={isOpen} />
       <MenuLinks isOpen={isOpen} />
     </NavBarContainer>
@@ -41,13 +40,8 @@ const MenuToggle = ({ toggle, isOpen }) => (
 );
 
 const MenuItem = ({ children, isLast, to = '/', ...rest }) => (
-  <Link
-    href={to}
-    _hover={{
-      transform: 'scale(1.1)',
-    }}
-  >
-    <Text display="block" fontFamily="Rajdhani-SemiBold" fontSize="lg" {...rest}>
+  <Link href={to}>
+    <Text display="block" fontFamily="Rajdhani-SemiBold" fontSize="xl" {...rest}>
       {children}
     </Text>
   </Link>
@@ -71,13 +65,16 @@ const MenuLinks = ({ isOpen }) => (
       <MenuItem to="/" isLast>
         <Button
           size="sm"
+          variant="ghost"
           rounded="md"
-          color="white"
-          bg="black"
+          fontFamily="Rajdhani-SemiBold"
+          fontSize="xl"
+          bg="#00c896"
+          color="#2f2e41"
           _hover={{
-            transform: 'scale(1.1)',
-            outline: 'none',
-            border: 'none',
+            boxShadow:
+              '0 12px 20px -10px rgba(0, 200, 150, 0.28), 0 4px 20px 0px rgba(0, 0, 0, 0.12), 0 7px 8px -5px rgba(0, 200, 150, 0.2)',
+            transform: 'translateY(-0.1rem)',
           }}
         >
           Create Account
@@ -96,8 +93,9 @@ const NavBarContainer = ({ children, ...props }) => (
     wrap="wrap"
     w="100%"
     mb={8}
-    px={8}
+    px={12}
     py={5}
+    zIndex="dropdown"
     bg="white"
     color="black"
     {...props}
