@@ -12,8 +12,8 @@ export default function Hero({ title, subtitle, image, ctaLink, ctaText, ...rest
         base: 'linear(to-b, #f2ecff, #ece5f9, #e5dff3, #dfd8ed, #d9d2e7)',
         md: 'linear(to-l, #f2ecff, #ece5f9, #e5dff3, #dfd8ed, #d9d2e7)',
       }}
-      minH="70vh"
-      px={12}
+      minH="100vh"
+      px={{ sm: 4, md: 12 }}
       pt={24}
       pb={14}
       {...rest}
@@ -45,7 +45,7 @@ export default function Hero({ title, subtitle, image, ctaLink, ctaText, ...rest
         >
           {subtitle}
         </Heading>
-        <Link href={ctaLink}>
+        <Link href={ctaLink} _hover={{ textDecoration: 'none' }}>
           <Button
             rightIcon={<ArrowForwardIcon />}
             borderRadius="8px"
@@ -61,7 +61,7 @@ export default function Hero({ title, subtitle, image, ctaLink, ctaText, ...rest
             _hover={{
               boxShadow:
                 '0 12px 20px -10px rgba(0, 200, 150, 0.28), 0 4px 20px 0px rgba(0, 0, 0, 0.12), 0 7px 8px -5px rgba(0, 200, 150, 0.2)',
-              transform: 'translateY(-0.1rem)',
+              transform: 'translateY(-0.1rem) scale(1.02)',
             }}
           >
             {ctaText}

@@ -40,8 +40,14 @@ const MenuToggle = ({ toggle, isOpen }) => (
 );
 
 const MenuItem = ({ children, isLast, to = '/', ...rest }) => (
-  <Link href={to}>
-    <Text display="block" fontFamily="Rajdhani-SemiBold" fontSize="xl" {...rest}>
+  <Link href={to} _hover={{ textDecoration: 'none' }}>
+    <Text
+      display="block"
+      fontFamily="Rajdhani-SemiBold"
+      fontSize="xl"
+      _hover={{ color: '#00c896' }}
+      {...rest}
+    >
       {children}
     </Text>
   </Link>
@@ -55,8 +61,8 @@ const MenuLinks = ({ isOpen }) => (
     <Stack
       spacing={8}
       align="center"
-      justify={['center', 'space-between', 'flex-end', 'flex-end']}
-      direction={['column', 'row', 'row', 'row']}
+      justify={['center', 'flex-end', 'flex-end', 'flex-end']}
+      direction={['column', 'column', 'row', 'row']}
       pt={[4, 4, 0, 0]}
     >
       <MenuItem to="/">Home</MenuItem>
@@ -64,7 +70,7 @@ const MenuLinks = ({ isOpen }) => (
       <MenuItem to="/">Your Stories</MenuItem>
       <MenuItem to="/" isLast>
         <Button
-          size="sm"
+          size="md"
           variant="ghost"
           rounded="md"
           fontFamily="Rajdhani-SemiBold"
@@ -74,7 +80,7 @@ const MenuLinks = ({ isOpen }) => (
           _hover={{
             boxShadow:
               '0 12px 20px -10px rgba(0, 200, 150, 0.28), 0 4px 20px 0px rgba(0, 0, 0, 0.12), 0 7px 8px -5px rgba(0, 200, 150, 0.2)',
-            transform: 'translateY(-0.1rem)',
+            transform: 'translateY(-0.1rem) scale(1.02)',
           }}
         >
           Create Account
@@ -93,7 +99,7 @@ const NavBarContainer = ({ children, ...props }) => (
     wrap="wrap"
     w="100%"
     mb={8}
-    px={12}
+    px={{ base: 4, md: 12 }}
     py={5}
     zIndex="dropdown"
     bg="white"
