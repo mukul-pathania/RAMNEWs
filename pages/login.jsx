@@ -49,7 +49,6 @@ export default function Login() {
         <Button type="submit" colorScheme="teal" mt="10">
           Submit
         </Button>
-        <Button onClick={() => Api.get('/headlines/sports')}>Test</Button>
       </form>
     </Container>
   );
