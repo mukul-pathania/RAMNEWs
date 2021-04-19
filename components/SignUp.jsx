@@ -53,6 +53,7 @@ export default function SignUp() {
             status: 'success',
             duration: 4000,
             isClosable: true,
+            position: 'bottom-right',
           })
         }
       >
