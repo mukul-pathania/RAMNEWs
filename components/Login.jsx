@@ -14,7 +14,7 @@ import {
   useToast,
 } from '@chakra-ui/react';
 
-export default function SignUp() {
+export default function Login() {
   const toast = useToast();
   return (
     <VStack
@@ -27,17 +27,11 @@ export default function SignUp() {
       boxShadow="lg"
       backgroundColor="white"
     >
-      <Heading fontSize="3xl" fontFamily="Rajdhani-Medium">
-        Sign Up
-      </Heading>
-      <FormControl id="name" isRequired="true" _hover={{ color: '#00c896' }}>
-        <FormLabel fontFamily="Rajdhani-SemiBold">Name</FormLabel>
-        <Input type="text" />
-      </FormControl>
+      <Heading fontSize="3xl">Login </Heading>
+
       <FormControl id="email" isRequired="true" _hover={{ color: '#00c896' }}>
         <FormLabel fontFamily="Rajdhani-SemiBold">Email address</FormLabel>
         <Input type="email" />
-        <FormHelperText>We'll never share your email.</FormHelperText>
       </FormControl>
       <FormControl id="password" isRequired="true" _hover={{ color: '#00c896' }}>
         <FormLabel fontFamily="Rajdhani-SemiBold">Password</FormLabel>
@@ -45,15 +39,15 @@ export default function SignUp() {
       </FormControl>
       <Spacer />
       <Button
-        fontFamily="LibreFranklin-Medium"
         type="submit"
-        size="md"
-        isRound="true"
         bg="#00c896"
+        size="md"
+        fontFamily="LibreFranklin-Light"
+        _hover={{ color: '#616161' }}
         onClick={() =>
           toast({
-            title: 'Account created.',
-            description: "We've created your account for you.",
+            title: 'Success',
+            description: 'Please Wait while we setup the page for you',
             status: 'success',
             duration: 4000,
             isClosable: true,
@@ -62,6 +56,28 @@ export default function SignUp() {
         }
       >
         Submit{' '}
+      </Button>
+      <Spacer />
+      <FormLabel fontSize="small" fontFamily="LibreFranklin-ExtraLight">
+        Don't have an account ?
+      </FormLabel>
+      <Button
+        bg="#616161"
+        fontFamily="LibreFranklin-Light"
+        size="sm"
+        _hover={{ color: '#00c896' }}
+        onClick={() =>
+          toast({
+            title: 'Redirecting to Signup Page.',
+            description: 'Please Wait...........',
+            status: 'success',
+            duration: 4000,
+            isClosable: false,
+            position: 'bottom-left',
+          })
+        }
+      >
+        SignUp
       </Button>
     </VStack>
   );

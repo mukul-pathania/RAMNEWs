@@ -1,8 +1,10 @@
-import { Box, Flex } from '@chakra-ui/react';
+import { Flex } from '@chakra-ui/react';
+import SignUpImage from '../components/SignUpImage';
 import SignUp from '../components/SignUp';
 
 const SignupPage = () => (
-  <Flex align="center" justify="center" minH="100vh">
+  <Flex align="center" justify="center" minH="100vh" backgroundColor="lightcyan">
+    <SignUpImage />
     <SignUp />
   </Flex>
 );
