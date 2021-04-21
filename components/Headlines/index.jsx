@@ -19,7 +19,9 @@ const Headlines = () => (
     <Tabs align="start" isFitted isLazy variant="unstyled" defaultIndex={0}>
       <TabList
         overflowX="auto"
-        mx={4}
+        mx={{ base: 1, md: 'auto' }}
+        px={2}
+        width={{ base: '100%', md: '80%' }}
         css={css({
           scrollbarWidth: 'none',
           '::-webkit-scrollbar': { display: 'none' },
@@ -54,7 +56,7 @@ const Headlines = () => (
             fontFamily="Rajdhani-SemiBold"
             my={1}
             mx={1}
-            px={6}
+            px={2}
           >
             {category.title}
           </Tab>
