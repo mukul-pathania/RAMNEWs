@@ -1,4 +1,5 @@
 import { ChakraProvider, CSSReset } from '@chakra-ui/react';
+import { AuthProvider } from '../contexts/AuthContext';
 import Layout from '../components/Layout';
 import '../global.css';
 
@@ -6,9 +7,11 @@ function MyApp({ Component, pageProps }) {
   return (
     <ChakraProvider>
       <CSSReset />
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
+      <AuthProvider>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </AuthProvider>
     </ChakraProvider>
   );
 }

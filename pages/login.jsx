@@ -1,34 +1,33 @@
 import { FormControl, FormLabel, Input, Container, Button } from '@chakra-ui/react';
 import { useReducer } from 'react';
-import axios from 'axios';
-import Api from '../adapters/api';
+import useAuth from '../contexts/AuthContext';
 
+const formState = { email: '', password: '' };
+const reducer = (state, action) => {
+  switch (action.type) {
+    case 'email':
+      return { ...state, email: action.value };
+    case 'password':
+      return { ...state, password: action.value };
+    default:
+      return state;
+  }
+};
 export default function Login() {
-  const formState = { email: '', password: '' };
-  const reducer = (state, action) => {
-    switch (action.type) {
-      case 'email':
-        return { ...state, email: action.value };
-      case 'password':
-        return { ...state, password: action.value };
-      default:
-        return state;
-    }
-  };
-
   const [state, dispatch] = useReducer(reducer, formState);
+  const { login } = useAuth();
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log('submitting');
     console.log(state);
     try {
-      await Api.post('login', state, { withCredentials: true });
+      login(state);
     } catch (e) {
       console.log(e);
     }
   };
   return (
-    <Container>
+    <Container pt={24}>
       <form id="loginForm" onSubmit={handleSubmit}>
         <FormControl id="email" mt="10">
           <FormLabel>Email:</FormLabel>

@@ -1,16 +1,13 @@
 import Axios from 'axios';
-import Router from 'next/router';
-
-let token;
 
 const api = Axios.create({
   baseURL: 'http://localhost:5000/',
+  crossDomain: true,
+  withCredentials: true,
   headers: {
     Accept: 'application/json',
     'Content-Type': 'application/json',
-    // 'Access-Control-Allow-Origin': '*',
   },
-  // crossDomain: true,
 });
 
 const getRefreshToken = async () => {
@@ -19,50 +16,24 @@ const getRefreshToken = async () => {
       withCredentials: true,
       crossDomain: true,
     });
-    console.log('Response', res);
-    token = res.data.token;
-    if (token) {
-      return token;
-    }
+    return res.data.token;
   } catch (error) {
     console.log(error);
-    Router.push('/');
   }
 };
 
 api.interceptors.response.use(
-  async (response) => {
-    console.log(response);
-    if (response.data.token) {
-      token = response.data.token;
-      console.log(api.defaults.headers);
-    }
-    return response;
-  },
+  async (response) => response,
   async (error) => {
     const ogReq = error.config;
     if (error.response.status === 401 && !ogReq._retry) {
       ogReq._retry = true;
-      console.log('retrying....');
-      token = await getRefreshToken();
+      const token = await getRefreshToken();
+      api.defaults.headers.Authorization = `Bearer ${token}`;
       if (token) {
         return api(ogReq); // retry original request
       }
     }
-  }
-);
-
-api.interceptors.request.use(
-  (config) => {
-    config.headers = {
-      Authorization: `Bearer ${token}`,
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-    };
-    return config;
-  },
-  (error) => {
-    Promise.reject(error);
   }
 );
 
