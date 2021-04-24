@@ -1,5 +1,5 @@
 from app import app
-from app.database import get_user, write_user , Refresh_Token , check_refresh_token
+from app.database import get_user_by_email, write_user , Refresh_Token , check_refresh_token, delete_refresh_token, get_user_by_id
 from app.token import get_token, get_refresh_token, token_required
 from app.newsapi import get_top_headlines
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -19,7 +19,7 @@ def ping():
 def login():
     try:
         json_data = request.get_json(force=True)
-        user_data = get_user(json_data)
+        user_data = get_user_by_email(json_data)
         if not user_data['user']:
             raise Exception(user_data['message'])
         user = user_data['user']
@@ -30,9 +30,27 @@ def login():
         return response, 200
 
     except Exception as e:
-        # print('error', e)
+        print('error', e)
         # e.with_traceback(e)
         return {'error': True, 'message': e.args[0]}, 401
+
+
+@app.route('/logout', methods=['GET'])
+@cross_origin()
+def logout():
+    refresh_token = request.cookies.get('refresh_token')
+    response = make_response({'error': False, 'message': 'User logged Out Successfully.'})
+    if not refresh_token:
+        return response
+    try:
+        decoded = jwt.decode(refresh_token, app.config['REFRESH_TOKEN_SECRET'], algorithms='HS256')
+        delete_refresh_token(decoded["user_id"])
+    except Exception as e:
+        print(e)
+    finally:
+        response.set_cookie('refresh_token', '', max_age=0)
+        return response
+
 
 
 @app.route('/signup', methods=['POST'])
@@ -84,3 +102,24 @@ def headlines(category):
     if(headlines['error']):
         return headlines, 500
     return headlines
+
+@app.route('/user_info', methods=['GET'])
+@cross_origin()
+@token_required
+def user_info():
+    try:
+        token = None
+        #Authorization : Bearer <token>
+        token = request.headers['Authorization'].split()[1]
+        data = jwt.decode(token, app.config['TOKEN_SECRET'], algorithms='HS256')
+        user = get_user_by_id(data['user_id'])
+        if not user:
+            return {'message': 'Cannot find User', 'error': True}
+    except jwt.ExpiredSignatureError:
+        return {'message': 'Token Expired', 'error': True}, 401
+    except Exception as e:
+        print(e)
+        return {'message': 'An error occured while processing your request', 'error': True}, 401
+
+    return {'user': user, 'error': False}
+    

@@ -1,7 +1,7 @@
 from app import app
 import pymongo
 from werkzeug.security import check_password_hash, generate_password_hash
-from bson import json_util
+from bson import json_util, objectid
 import json
 
 #Connection with mongodb
@@ -16,8 +16,20 @@ Users.create_index([('email', pymongo.ASCENDING)], unique=True)
 Refresh_Token = db.refresh_token
 
 
+def get_user_by_id(user_id):
+    try:
+        user_id = objectid.ObjectId(user_id)
+        user = Users.find_one({'_id': user_id})
+        del user['password']
+        del user['_id']
+        if not user:
+            return None
+        return user
+    except Exception as e:
+        return None
 
-def get_user(user_data):
+
+def get_user_by_email(user_data):
     try:
         user = Users.find_one({'email': user_data['email']})
     
@@ -53,6 +65,14 @@ def write_user(user_data):
         return {'user_id': None, 'message': 'An error occured while processing the request'}
 
 
+def delete_refresh_token(user_id):
+    try:
+        Refresh_Token.delete_many({'user_id': user_id})
+    except Exception as e:
+        print(e)
+        return None
+
+
 def check_refresh_token(user_id):
     try:
         refreshtoken = Refresh_Token.find_one({'user_id': user_id})
@@ -62,5 +82,4 @@ def check_refresh_token(user_id):
             return{'refresh_token': False, 'message' : 'No token Found'}
     except  Exception as e:
         return{'refresh_token': False, 'message' : 'Error occured while processing request'}
-
 
