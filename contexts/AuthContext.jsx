@@ -18,7 +18,6 @@ export const AuthProvider = ({ children }) => {
       }
       setUser(resp.data.user);
     } catch (error) {
-      console.log(error.response);
       setLoading(false);
       return null;
     }
@@ -35,7 +34,6 @@ export const AuthProvider = ({ children }) => {
       loadUser();
       return loginInfo;
     } catch (error) {
-      console.log(error);
       return error.response.data;
     }
   };

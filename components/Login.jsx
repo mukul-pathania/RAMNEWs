@@ -58,7 +58,6 @@ export default function Login() {
       }
       router.push('/headlines');
     } catch (e) {
-      console.log(e);
       toast({
         title: 'Error Occured',
         description: 'An error occured while processing your request',

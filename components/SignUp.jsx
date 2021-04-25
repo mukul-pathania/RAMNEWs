@@ -43,6 +43,7 @@ export default function SignUp() {
   const toast = useToast();
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     try {
       const isSignedUp = await api.post('signup', state);
       if (isSignedUp.error) {
@@ -61,7 +62,7 @@ export default function SignUp() {
     } catch (e) {
       toast({
         title: 'SignUp Failed',
-        description: e.response.data.message,
+        description: e?.response?.data?.message || 'An error occured while processing your request',
         status: 'error',
         duration: '5000',
         position: 'top',
@@ -70,7 +71,6 @@ export default function SignUp() {
       });
     }
   };
-  console.log(state);
 
   return (
     <Flex bg="#00c896" minH="100vh" justify="center" align="center" pt={24}>

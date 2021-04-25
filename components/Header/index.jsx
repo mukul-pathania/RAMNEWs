@@ -75,7 +75,6 @@ const MenuItem = ({ children, isLast, to = '/', ...rest }) => (
 const MenuLinks = ({ isOpen }) => {
   const { isAuthenticated, logout } = useAuth();
   const { pathname } = useRouter();
-  console.log(pathname);
   return (
     <Box
       display={{ base: isOpen ? 'block' : 'none', md: 'block' }}
