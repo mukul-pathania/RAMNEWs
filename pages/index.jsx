@@ -1,9 +1,15 @@
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 import Hero from '../components/Hero';
+import useAuth from '../contexts/AuthContext';
 
 const toss = () => Math.floor(Math.random() * 2);
 
 export default function Home() {
+  const { isAuthenticated } = useAuth();
+  const router = useRouter();
+  if (isAuthenticated) router.push('/headlines');
+
   return (
     <div>
       <Head>

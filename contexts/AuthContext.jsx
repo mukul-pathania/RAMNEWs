@@ -1,25 +1,25 @@
 import { createContext, useContext, useEffect, useState } from 'react';
-import Router from 'next/router';
+import { useRouter } from 'next/router';
 import api from '../adapters/api';
+import PageLoadingSkeleton from '../components/PageLoadingSkeleton';
 
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
-
+  const router = useRouter();
   const loadUser = async () => {
     try {
       const resp = await api.get('user_info');
-      if (!resp) return;
-      if (resp.data.error) {
-        setLoading(false);
+      setLoading(false);
+      if (!resp || resp.data.error) {
         return;
       }
       setUser(resp.data.user);
-      setLoading(false);
     } catch (error) {
       console.log(error.response);
+      setLoading(false);
       return null;
     }
   };
@@ -36,14 +36,15 @@ export const AuthProvider = ({ children }) => {
       return loginInfo;
     } catch (error) {
       console.log(error);
-      return null;
+      return error.response.data;
     }
   };
 
   const logout = () => {
     api.get('logout');
     delete api.defaults.headers.Authorization;
-    Router.push('/login');
+    setUser(null);
+    router.push('/');
   };
 
   useEffect(() => {
@@ -51,17 +52,15 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   const value = { isAuthenticated: !!user, user, login, loading, logout };
+  if (loading) return <PageLoadingSkeleton />;
 
-  console.log(user, loading);
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
 
-const useAuth = () => {
+export default function useAuth() {
   const context = useContext(AuthContext);
   if (context === undefined) {
     throw new Error('useAuth must be used within a AuthProvider');
   }
   return context;
-};
-
-export default useAuth;
+}

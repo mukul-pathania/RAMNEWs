@@ -26,13 +26,20 @@ api.interceptors.response.use(
   async (response) => response,
   async (error) => {
     const ogReq = error.config;
-    if (error.response.status === 401 && !ogReq._retry) {
+    if (
+      ogReq.url !== 'login' &&
+      ogReq.url !== 'signup' &&
+      error.response.status === 401 &&
+      !ogReq._retry
+    ) {
       ogReq._retry = true;
       const token = await getRefreshToken();
       api.defaults.headers.Authorization = `Bearer ${token}`;
       if (token) {
         return api(ogReq); // retry original request
       }
+    } else {
+      return Promise.reject(error);
     }
   }
 );

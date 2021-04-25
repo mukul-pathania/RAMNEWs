@@ -1,12 +1,12 @@
 import React from 'react';
 import { Link, Box, Flex, Text, Button, Stack } from '@chakra-ui/react';
+import { useRouter } from 'next/router';
+import useAuth from '../../contexts/AuthContext';
 import Logo from './Logo';
 
 const NavBar = (props) => {
   const [isOpen, setIsOpen] = React.useState(false);
-
   const toggle = () => setIsOpen(!isOpen);
-
   return (
     <NavBarContainer boxShadow="lg" {...props}>
       <Logo w="8rem" color="black" />
@@ -15,6 +15,25 @@ const NavBar = (props) => {
     </NavBarContainer>
   );
 };
+
+const MyButton = ({ text, ...rest }) => (
+  <Button
+    size="md"
+    rounded="md"
+    fontFamily="Rajdhani-SemiBold"
+    fontSize="xl"
+    bg="#00c896"
+    color="#2f2e41"
+    _hover={{
+      boxShadow:
+        '0 12px 20px -10px rgba(0, 200, 150, 0.28), 0 4px 20px 0px rgba(0, 0, 0, 0.12), 0 7px 8px -5px rgba(0, 200, 150, 0.2)',
+      transform: 'translateY(-0.1rem) scale(1.02)',
+    }}
+    {...rest}
+  >
+    {text}
+  </Button>
+);
 
 const CloseIcon = () => (
   <svg width="24" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
@@ -53,42 +72,39 @@ const MenuItem = ({ children, isLast, to = '/', ...rest }) => (
   </Link>
 );
 
-const MenuLinks = ({ isOpen }) => (
-  <Box
-    display={{ base: isOpen ? 'block' : 'none', md: 'block' }}
-    flexBasis={{ base: '100%', md: 'auto' }}
-  >
-    <Stack
-      spacing={8}
-      align="center"
-      justify={['center', 'flex-end', 'flex-end', 'flex-end']}
-      direction={['column', 'column', 'row', 'row']}
-      pt={[4, 4, 0, 0]}
+const MenuLinks = ({ isOpen }) => {
+  const { isAuthenticated, logout } = useAuth();
+  const { pathname } = useRouter();
+  console.log(pathname);
+  return (
+    <Box
+      display={{ base: isOpen ? 'block' : 'none', md: 'block' }}
+      flexBasis={{ base: '100%', md: 'auto' }}
     >
-      <MenuItem to="/">Home</MenuItem>
-      <MenuItem to="/headlines">Headlines</MenuItem>
-      <MenuItem to="/">Your Stories</MenuItem>
-      <MenuItem to="/" isLast>
-        <Button
-          size="md"
-          variant="ghost"
-          rounded="md"
-          fontFamily="Rajdhani-SemiBold"
-          fontSize="xl"
-          bg="#00c896"
-          color="#2f2e41"
-          _hover={{
-            boxShadow:
-              '0 12px 20px -10px rgba(0, 200, 150, 0.28), 0 4px 20px 0px rgba(0, 0, 0, 0.12), 0 7px 8px -5px rgba(0, 200, 150, 0.2)',
-            transform: 'translateY(-0.1rem) scale(1.02)',
-          }}
-        >
-          Create Account
-        </Button>
-      </MenuItem>
-    </Stack>
-  </Box>
-);
+      <Stack
+        spacing={8}
+        align="center"
+        justify={['center', 'flex-end', 'flex-end', 'flex-end']}
+        direction={['column', 'column', 'row', 'row']}
+        pt={[4, 4, 0, 0]}
+      >
+        {!isAuthenticated && <MenuItem to="/">Home</MenuItem>}
+        <MenuItem to="/headlines">Headlines</MenuItem>
+        <MenuItem to="/">Your Stories</MenuItem>
+        {!isAuthenticated && pathname !== '/login' && pathname !== '/signup' && (
+          <MenuItem to="/signup" isLast>
+            <MyButton text="Create Account" />
+          </MenuItem>
+        )}
+        {isAuthenticated && (
+          <MenuItem to="" isLast>
+            <MyButton text="Logout" onClick={logout} />
+          </MenuItem>
+        )}
+      </Stack>
+    </Box>
+  );
+};
 
 const NavBarContainer = ({ children, ...props }) => (
   <Flex

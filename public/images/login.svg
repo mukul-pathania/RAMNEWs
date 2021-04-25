@@ -1,5 +1,4 @@
-const LoginImage = () => (
-  <svg
+<svg
     id="befb3988-1ef2-42f3-9de0-b031ba9e9b47"
     data-name="Layer 1"
     xmlns="http://www.w3.org/2000/svg"
@@ -136,6 +135,3 @@ const LoginImage = () => (
       fill="#00c896"
     />
   </svg>
-);
-
-export default LoginImage;
