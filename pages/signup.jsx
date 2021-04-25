@@ -1,12 +1,16 @@
-import { Flex } from '@chakra-ui/react';
-import SignUpImage from '../components/SignUpImage';
+import { useRouter } from 'next/router';
+import PageLoadingSkeleton from '../components/PageLoadingSkeleton';
 import SignUp from '../components/SignUp';
+import useAuth from '../contexts/AuthContext';
 
-const SignupPage = () => (
-  <Flex align="center" justify="center" minH="100vh" backgroundColor="lightcyan">
-    <SignUpImage />
-    <SignUp />
-  </Flex>
-);
+const SignupPage = () => {
+  const { isAuthenticated } = useAuth();
+  const router = useRouter();
+  if (isAuthenticated) {
+    router.push('/headlines');
+    return <PageLoadingSkeleton />;
+  }
+  return <SignUp />;
+};
 
 export default SignupPage;

@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import Hero from '../components/Hero';
+import PageLoadingSkeleton from '../components/PageLoadingSkeleton';
 import useAuth from '../contexts/AuthContext';
 
 const toss = () => Math.floor(Math.random() * 2);
@@ -8,7 +9,10 @@ const toss = () => Math.floor(Math.random() * 2);
 export default function Home() {
   const { isAuthenticated } = useAuth();
   const router = useRouter();
-  if (isAuthenticated) router.push('/headlines');
+  if (isAuthenticated) {
+    router.push('/headlines');
+    return <PageLoadingSkeleton />;
+  }
 
   return (
     <div>
@@ -20,7 +24,7 @@ export default function Home() {
         subtitle="With RAMNEWS you can get all the latest happenings from around the world."
         image={`/images/${toss() === 0 ? 'hero.svg' : 'hero2.svg'}`}
         ctaText="Create your account now"
-        ctaLink="/"
+        ctaLink="/signup"
       />
     </div>
   );

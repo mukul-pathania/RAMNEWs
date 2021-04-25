@@ -1,4 +1,3 @@
-const SignUpImage = () => (
   <svg
     id="a5c16198-98a1-478b-8909-43624583dcf2"
     data-name="Layer 1"
@@ -123,6 +122,3 @@ const SignUpImage = () => (
       fill="#2f2e41"
     />
   </svg>
-);
-
-export default SignUpImage;

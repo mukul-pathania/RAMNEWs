@@ -7,21 +7,23 @@ import {
   Image,
   Heading,
   useToast,
+  Checkbox,
   Text,
-  Link,
 } from '@chakra-ui/react';
 import { ArrowForwardIcon } from '@chakra-ui/icons';
 import { useReducer } from 'react';
 import { useRouter } from 'next/router';
 import useAuth from '../contexts/AuthContext';
 
-const formState = { email: '', password: '' };
+const formState = { email: '', password: '', showPassword: false };
 const reducer = (state, action) => {
   switch (action.type) {
     case 'email':
       return { ...state, email: action.value };
     case 'password':
       return { ...state, password: action.value };
+    case 'showPassword':
+      return { ...state, showPassword: action.value };
     default:
       return state;
   }
@@ -62,6 +64,7 @@ export default function Login() {
         description: 'An error occured while processing your request',
         status: 'error',
         duration: '5000',
+        position: 'top',
         variant: 'subtle',
         isClosable: true,
       });
@@ -69,7 +72,7 @@ export default function Login() {
   };
   return (
     <Flex bg="#00c896" minH="100vh" minW="100vw" justify="center" align="center" pt={24}>
-      <Flex w={{ base: '90%', md: '70%' }} bg="white" borderRadius="xl" shadow="lg">
+      <Flex w={{ base: '90%', md: '70%' }} bg="white" borderRadius="xl" shadow="lg" mb={12}>
         <Image
           bgGradient="linear(to-tr, #c6fced, #c5faff, #d1f5ff, #e3f0ff, #f2ecff)"
           //   bgGradient="linear(to-l,#f2ecff, #00bb9b, #00af9d, #00a19c, #009498)"
@@ -111,11 +114,21 @@ export default function Login() {
                 variant="flushed"
                 fontFamily="Rajdhani-Medium"
                 placeholder="Enter password"
-                type="password"
+                type={state.showPassword ? 'text' : 'password'}
                 value={state.password}
                 onChange={(e) => dispatch({ type: 'password', value: e.target.value })}
               />
             </FormControl>
+            <Checkbox
+              mt="10"
+              size="lg"
+              onChange={() => dispatch({ type: 'showPassword', value: !state.showPassword })}
+            >
+              <Text fontFamily="Rajdhani-Medium" fontSize="md">
+                Show Password
+              </Text>
+            </Checkbox>
+
             <Button
               isFullWidth
               rightIcon={<ArrowForwardIcon />}
