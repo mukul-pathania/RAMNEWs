@@ -11,10 +11,11 @@ const Headlines = () => {
       px={{ sm: 2, md: 12 }}
       pt={24}
       minH="100vh"
-      bgGradient={{
-        base: 'linear(to-b, #f2ecff, #ece5f9, #e5dff3, #dfd8ed, #d9d2e7)',
-        md: 'linear(to-l, #f2ecff, #ece5f9, #e5dff3, #dfd8ed, #d9d2e7)',
-      }}
+      // bgGradient={{
+      //   base: 'linear(to-b, #f2ecff, #ece5f9, #e5dff3, #dfd8ed, #d9d2e7)',
+      //   md: 'linear(to-l, #f2ecff, #ece5f9, #e5dff3, #dfd8ed, #d9d2e7)',
+      // }}
+      bg="#eee"
     >
       <Heading fontFamily="LibreFranklin-Medium" fontSize="4xl" textAlign="center" p={4}>
         Hello {user.username}

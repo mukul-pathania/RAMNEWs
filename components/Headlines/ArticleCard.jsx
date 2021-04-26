@@ -17,7 +17,7 @@ const ArticleCard = ({ article }) => (
   <Box
     d="flex"
     p={6}
-    boxShadow="sm"
+    boxShadow="lg"
     bg="white"
     w="100%"
     borderRadius="lg"

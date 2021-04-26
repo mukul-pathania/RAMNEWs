@@ -70,7 +70,7 @@ export default function Login() {
     }
   };
   return (
-    <Flex bg="#00c896" minH="100vh" minW="100vw" justify="center" align="center" pt={24}>
+    <Flex bg="#00c896" minH="100vh" justify="center" align="center" pt={24}>
       <Flex w={{ base: '90%', md: '70%' }} bg="white" borderRadius="xl" shadow="lg" mb={12}>
         <Image
           bgGradient="linear(to-tr, #c6fced, #c5faff, #d1f5ff, #e3f0ff, #f2ecff)"

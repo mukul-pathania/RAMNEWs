@@ -1,7 +1,7 @@
 import Axios from 'axios';
 
 const api = Axios.create({
-  baseURL: 'http://localhost:5000/',
+  baseURL: process.env.NEXT_PUBLIC_BASE_URL,
   crossDomain: true,
   withCredentials: true,
   headers: {
@@ -12,7 +12,7 @@ const api = Axios.create({
 
 const getRefreshToken = async () => {
   try {
-    const res = await Axios.get('http://localhost:5000/refresh_token', {
+    const res = await Axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}refresh_token`, {
       withCredentials: true,
       crossDomain: true,
     });
