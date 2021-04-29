@@ -11,7 +11,7 @@ const NavBar = (props) => {
     <NavBarContainer boxShadow="lg" {...props}>
       <Logo w="8rem" color="black" />
       <MenuToggle toggle={toggle} isOpen={isOpen} />
-      <MenuLinks isOpen={isOpen} />
+      <MenuLinks isOpen={isOpen} setIsOpen={setIsOpen} />
     </NavBarContainer>
   );
 };
@@ -72,11 +72,12 @@ const MenuItem = ({ children, isLast, to = '/', ...rest }) => (
   </Link>
 );
 
-const MenuLinks = ({ isOpen }) => {
+const MenuLinks = ({ isOpen, setIsOpen }) => {
   const { isAuthenticated, logout } = useAuth();
   const logoutHandler = (e) => {
     e.preventDefault();
     logout();
+    setIsOpen(false);
     return false;
   };
   const { pathname } = useRouter();

@@ -45,7 +45,11 @@ export default function SignUp() {
     e.preventDefault();
 
     try {
-      const isSignedUp = await api.post('signup', state);
+      const isSignedUp = await api.post('signup', {
+        email: state.email,
+        password: state.password,
+        name: state.name,
+      });
       if (isSignedUp.error) {
         toast({
           title: 'SignUp Failed',

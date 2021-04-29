@@ -18,7 +18,7 @@ const Headlines = () => {
       bg="#eee"
     >
       <Heading fontFamily="LibreFranklin-Medium" fontSize="4xl" textAlign="center" p={4}>
-        Hello {user.username}
+        Hello {user.name}
       </Heading>
       <Tabs align="start" isFitted isLazy variant="unstyled" defaultIndex={0}>
         <TabList
