@@ -74,6 +74,11 @@ const MenuItem = ({ children, isLast, to = '/', ...rest }) => (
 
 const MenuLinks = ({ isOpen }) => {
   const { isAuthenticated, logout } = useAuth();
+  const logoutHandler = (e) => {
+    e.preventDefault();
+    logout();
+    return false;
+  };
   const { pathname } = useRouter();
   return (
     <Box
@@ -97,7 +102,7 @@ const MenuLinks = ({ isOpen }) => {
         )}
         {isAuthenticated && (
           <MenuItem to="" isLast>
-            <MyButton text="Logout" onClick={logout} />
+            <MyButton text="Logout" onClick={logoutHandler} />
           </MenuItem>
         )}
       </Stack>
