@@ -95,7 +95,7 @@ const MenuLinks = ({ isOpen, setIsOpen }) => {
       >
         {!isAuthenticated && <MenuItem to="/">Home</MenuItem>}
         <MenuItem to="/headlines">Headlines</MenuItem>
-        <MenuItem to="/">Your Stories</MenuItem>
+        {/* <MenuItem to="/">Your Stories</MenuItem> */}
         {!isAuthenticated && pathname !== '/login' && pathname !== '/signup' && (
           <MenuItem to="/signup" isLast>
             <MyButton text="Create Account" />
