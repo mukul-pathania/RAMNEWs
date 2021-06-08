@@ -26,7 +26,7 @@ def login():
         token = get_token(user['_id']['$oid'])
         refresh_token = get_refresh_token(user['_id']['$oid'])
         response = make_response({'token': token, 'error': False, 'message': 'Logged in successfully'})
-        response.set_cookie('refresh_token', refresh_token, httponly=True)
+        response.headers.add('Set-Cookie', f'refresh_token={refresh_token}; HttpOnly; SameSite=None; Secure')
         return response, 200
 
     except Exception as e:
@@ -48,7 +48,7 @@ def logout():
     except Exception as e:
         print(e)
     finally:
-        response.set_cookie('refresh_token', '', max_age=0)
+        response.headers.add('Set-Cookie', f'refresh_token=''; HttpOnly; SameSite=None; Max-Age=0; Secure')
         return response
 
 
@@ -76,7 +76,7 @@ def refresh_token():
             token = get_token(decoded["user_id"])
             refresh_token = get_refresh_token(decoded["user_id"])
             response = make_response({'token': token, 'error': False, 'message': 'Request Processed'})
-            response.set_cookie('refresh_token', refresh_token, httponly=True)
+            response.headers.add('Set-Cookie', f'refresh_token={refresh_token}; HttpOnly; SameSite=None; Secure')
             return response, 200
         else :
             response = make_response({'token': None, 'error': True, 'message': 'Invalid Refresh Token'})
