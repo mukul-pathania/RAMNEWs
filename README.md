@@ -1,34 +1,69 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# RAMNEWs
 
-## Getting Started
+RAM is just a short form for Rohit, Ajith, Mukul as we were not able to come up with any name or you can read it as RAM(Random Access Memory).  
+This is a simple web application to list out news articles by their categories(think google news).
 
-First, run the development server:
+We are using [Next.js](https://nextjs.org) to build our front-end and a simple flask backend to service it.
+
+We are using [newsapi](https://newsapi.org/) to fetch news articles and have setup an additional cache layer using [redis](https://redis.io/) to reduce network calls and also to prevent running out of daily quota that newsapi have setup.
+
+## Running the project locally
+
+### For backend
+
+Install all the dependencies into a new virtual environment
 
 ```bash
-npm run dev
-# or
-yarn dev
+cd api
+
+#Create a new virtual environment
+python3 -m venv venv
+
+#Activate the virtual environment
+. venv/bin/activate
+
+#Install the dependencies
+pip install -r requirements.txt
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Fill up all the required variables in .env.example  
+We have chosen mongodb as the database and redis to maintain cache, provide the credentials in .env.example to connect to your instances of mongodb and redis and rename .env.example to .env
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+Go the [newsapi](https://newsapi.org/) to generate your api key and add it in .env file.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+Add your secrets that will be used to generate JSON Web tokens for the users.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+Once the setup is done you can start the backend by giving the command (while still in the virtual environment)
+```bash
+flask run
+```
 
-## Learn More
+### For frontend
 
-To learn more about Next.js, take a look at the following resources:
+Stay at the root of the project and run the following command to install all the dependencies.
+```bash
+yarn
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+One the dependencies are installed you can run
+```bash
+yarn dev
+```
+The frontend should be running now and you should be able to access the website on your browser at [http://localhost:3000/](http://localhost:3000).
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
+## Hosted Live For Demo
+The frontend of this website is hosted on vercel.
+Check it out at [https://ramnews.vercel.app](https://ramnews.vercel.app).
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+The backend of this website is hosted on an EC2 instance which can be accessed at https://mukulpathania.games:5000/.  
+(The backend may not be accessible after sometime if shutdown once my credits are finished or due to any other reason)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Some Screenshots
+![screenshot of website](./screenshots/screenshot1.png)
+
+
+![screenshot of website](./screenshots/screenshot2.png)
+
+
+![screenshot of website](./screenshots/screenshot3.png)
