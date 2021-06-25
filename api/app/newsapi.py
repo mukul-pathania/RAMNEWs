@@ -3,7 +3,7 @@ from app.redis import get_from_cache, set_to_cache
 import json
 import requests
 
-headers={app.config['NEWS_API_SECRET']: app.config['NEWS_API_KEY'],
+headers={'X-Api-Key': app.config['NEWS_API_KEY'],
         'Accept': 'application/json',
         'Content-Type': 'application/json'}
 
