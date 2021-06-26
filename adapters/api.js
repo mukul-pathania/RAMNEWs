@@ -18,7 +18,7 @@ const getRefreshToken = async () => {
     });
     return res.data.token;
   } catch (error) {
-    console.log(error);
+    return null;
   }
 };
 
