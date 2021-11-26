@@ -1,5 +1,6 @@
 import { ArrowForwardIcon } from '@chakra-ui/icons';
 import { Box, Button, Flex, Image, Heading, Stack, Link } from '@chakra-ui/react';
+import NextLink from 'next/link';
 
 export default function Hero({ title, subtitle, image, ctaLink, ctaText, ...rest }) {
   return (
@@ -45,7 +46,7 @@ export default function Hero({ title, subtitle, image, ctaLink, ctaText, ...rest
         >
           {subtitle}
         </Heading>
-        <Link href={ctaLink} _hover={{ textDecoration: 'none' }}>
+        <Link as={NextLink} href={ctaLink} _hover={{ textDecoration: 'none' }}>
           <Button
             rightIcon={<ArrowForwardIcon />}
             borderRadius="8px"

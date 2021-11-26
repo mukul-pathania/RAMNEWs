@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, Box, Flex, Text, Button, Stack } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
+import NextLink from 'next/link';
 import useAuth from '../../contexts/AuthContext';
 import Logo from './Logo';
 
@@ -59,7 +60,7 @@ const MenuToggle = ({ toggle, isOpen }) => (
 );
 
 const MenuItem = ({ children, isLast, to = '/', ...rest }) => (
-  <Link href={to} _hover={{ textDecoration: 'none' }}>
+  <Link as={NextLink} href={to} _hover={{ textDecoration: 'none' }}>
     <Text
       display="block"
       fontFamily="Rajdhani-SemiBold"

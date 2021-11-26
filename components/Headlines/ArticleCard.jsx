@@ -1,4 +1,5 @@
-import { Box, Button, Link, Text, Image } from '@chakra-ui/react';
+import { Box, Button, Link, Image } from '@chakra-ui/react';
+import NextLink from 'next/link';
 import moment from 'moment';
 
 /**
@@ -51,7 +52,7 @@ const ArticleCard = ({ article }) => (
           <p style={{ fontFamily: 'Rajdhani-Medium', fontSize: '1.5rem' }}>{article.description}</p>
         </li>
       </ul>
-      <Link href={article.url} target="_blank">
+      <Link as={NextLink} href={article.url} target="_blank">
         <Button bg="#00C896">Read More</Button>
       </Link>
     </Box>
