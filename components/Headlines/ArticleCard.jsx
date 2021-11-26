@@ -52,7 +52,12 @@ const ArticleCard = ({ article }) => (
           <p style={{ fontFamily: 'Rajdhani-Medium', fontSize: '1.5rem' }}>{article.description}</p>
         </li>
       </ul>
-      <Link as={NextLink} href={article.url} target="_blank">
+      <Link
+        as={NextLink}
+        href={article.url}
+        target="_blank"
+        style={{ maxWidth: '10rem', marginTop: '2rem' }}
+      >
         <Button bg="#00C896">Read More</Button>
       </Link>
     </Box>
