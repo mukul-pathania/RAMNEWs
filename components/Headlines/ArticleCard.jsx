@@ -72,7 +72,7 @@ const ArticleCard = ({ article, getSummary }) => (
           _hover={{ bg: '#ccc', color: '#000' }}
           onClick={() => getSummary(article.url, article.urlToImage)}
         >
-          View Summary
+          Summary
         </Button>
       </HStack>
     </Box>
