@@ -71,7 +71,13 @@ export default function Login() {
   };
   return (
     <Flex bg="#00c896" minH="100vh" justify="center" align="center" pt={24}>
-      <Flex w={{ base: '90%', md: '70%' }} bg="white" borderRadius="xl" shadow="lg" mb={12}>
+      <Flex
+        w={{ base: '90%', md: '70%' }}
+        bg="white"
+        borderRadius="xl"
+        shadow="lg"
+        mb={12}
+      >
         <Image
           bgGradient="linear(to-tr, #c6fced, #c5faff, #d1f5ff, #e3f0ff, #f2ecff)"
           //   bgGradient="linear(to-l,#f2ecff, #00bb9b, #00af9d, #00a19c, #009498)"
@@ -82,7 +88,11 @@ export default function Login() {
           display={{ base: 'none', md: 'block' }}
         />
         <Flex direction="column" justify="center" px={12} py={16} w="100%">
-          <Heading fontFamily="Rajdhani-Bold" size="2xl" textAlign={{ base: 'center', md: 'left' }}>
+          <Heading
+            fontFamily="Rajdhani-Bold"
+            size="2xl"
+            textAlign={{ base: 'center', md: 'left' }}
+          >
             Login
           </Heading>
           <form id="loginForm" onSubmit={handleSubmit}>
@@ -99,7 +109,9 @@ export default function Login() {
                 type="email"
                 value={state.email}
                 placeholder="Enter your email"
-                onChange={(e) => dispatch({ type: 'email', value: e.target.value })}
+                onChange={(e) =>
+                  dispatch({ type: 'email', value: e.target.value })
+                }
               />
             </FormControl>
             <FormControl id="password" mt="10">
@@ -115,13 +127,17 @@ export default function Login() {
                 placeholder="Enter password"
                 type={state.showPassword ? 'text' : 'password'}
                 value={state.password}
-                onChange={(e) => dispatch({ type: 'password', value: e.target.value })}
+                onChange={(e) =>
+                  dispatch({ type: 'password', value: e.target.value })
+                }
               />
             </FormControl>
             <Checkbox
               mt="10"
               size="lg"
-              onChange={() => dispatch({ type: 'showPassword', value: !state.showPassword })}
+              onChange={() =>
+                dispatch({ type: 'showPassword', value: !state.showPassword })
+              }
             >
               <Text fontFamily="Rajdhani-Medium" fontSize="md">
                 Show Password

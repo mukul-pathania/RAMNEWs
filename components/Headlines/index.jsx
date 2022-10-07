@@ -1,4 +1,13 @@
-import { Flex, Tab, Tabs, TabList, Heading, css, TabPanels, TabPanel } from '@chakra-ui/react';
+import {
+  Flex,
+  Tab,
+  Tabs,
+  TabList,
+  Heading,
+  css,
+  TabPanels,
+  TabPanel,
+} from '@chakra-ui/react';
 import ArticleList from './ArticleList';
 import Categories from './Categories';
 import useAuth from '../../contexts/AuthContext';
@@ -17,7 +26,12 @@ const Headlines = () => {
       // }}
       bg="#eee"
     >
-      <Heading fontFamily="LibreFranklin-Medium" fontSize="4xl" textAlign="center" p={4}>
+      <Heading
+        fontFamily="LibreFranklin-Medium"
+        fontSize="4xl"
+        textAlign="center"
+        p={4}
+      >
         Hello {user.name}
       </Heading>
       <Tabs align="start" isFitted isLazy variant="unstyled" defaultIndex={0}>
@@ -70,7 +84,10 @@ const Headlines = () => {
         <TabPanels>
           {Categories.map((category) => (
             <TabPanel key={category.title}>
-              <ArticleList title={category.title} endpoint={category.endpoint} />
+              <ArticleList
+                title={category.title}
+                endpoint={category.endpoint}
+              />
             </TabPanel>
           ))}
         </TabPanels>

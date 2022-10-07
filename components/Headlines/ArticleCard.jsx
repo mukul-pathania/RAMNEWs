@@ -3,16 +3,16 @@ import NextLink from 'next/link';
 import moment from 'moment';
 
 /**
-*
-* @Rohit please work on this component, this component will receive an article in the props
-* you will have to do the tough work of making it look good. Please try to make it like google news.
-* All the required data is provided in the article, please check what data is present in the article
-* and display it accordingly and also be beware that you may have to format some of the data given and
-* also sometimes some data we are relying upon is not present in the article.
-*
-*
-* Use moment to render the timestamp.
-*/
+ *
+ * @Rohit please work on this component, this component will receive an article in the props
+ * you will have to do the tough work of making it look good. Please try to make it like google news.
+ * All the required data is provided in the article, please check what data is present in the article
+ * and display it accordingly and also be beware that you may have to format some of the data given and
+ * also sometimes some data we are relying upon is not present in the article.
+ *
+ *
+ * Use moment to render the timestamp.
+ */
 
 const ArticleCard = ({ article, getSummary }) => (
   <Box
@@ -49,7 +49,9 @@ const ArticleCard = ({ article, getSummary }) => (
       </p>
       <ul>
         <li>
-          <p style={{ fontFamily: 'Rajdhani-Medium', fontSize: '1.5rem' }}>{article.description}</p>
+          <p style={{ fontFamily: 'Rajdhani-Medium', fontSize: '1.5rem' }}>
+            {article.description}
+          </p>
         </li>
       </ul>
       <HStack spacing="24px">
@@ -59,9 +61,19 @@ const ArticleCard = ({ article, getSummary }) => (
           target="_blank"
           style={{ maxWidth: '10rem', marginTop: '2rem' }}
         >
-          <Button bg="#00C896" width="full">Read More</Button>
+          <Button bg="#00C896" width="full">
+            Read More
+          </Button>
         </Link>
-        <Button bg="#000" color="#fff" width="full" _hover={{bg: "#ccc", color: "#000"}} onClick={()=>getSummary(article.url, article.urlToImage)}>View Summary</Button>
+        <Button
+          bg="#000"
+          color="#fff"
+          width="full"
+          _hover={{ bg: '#ccc', color: '#000' }}
+          onClick={() => getSummary(article.url, article.urlToImage)}
+        >
+          View Summary
+        </Button>
       </HStack>
     </Box>
     <Image
@@ -69,7 +81,7 @@ const ArticleCard = ({ article, getSummary }) => (
       height={{ base: '100%', md: '100%', lg: '100%' }}
       borderRadius="lg"
       src={article.urlToImage}
-      />
+    />
   </Box>
 );
 

@@ -1,8 +1,23 @@
 import { ArrowForwardIcon } from '@chakra-ui/icons';
-import { Box, Button, Flex, Image, Heading, Stack, Link } from '@chakra-ui/react';
+import {
+  Box,
+  Button,
+  Flex,
+  Image,
+  Heading,
+  Stack,
+  Link,
+} from '@chakra-ui/react';
 import NextLink from 'next/link';
 
-export default function Hero({ title, subtitle, image, ctaLink, ctaText, ...rest }) {
+export default function Hero({
+  title,
+  subtitle,
+  image,
+  ctaLink,
+  ctaText,
+  ...rest
+}) {
   return (
     <Flex
       align="center"
